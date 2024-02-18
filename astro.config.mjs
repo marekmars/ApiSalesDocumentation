@@ -7,14 +7,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Docs with Tailwind',
-      defaultLocale: 'en',
-      locales: {
-        // English docs in `src/content/docs/en/`
-        en: {
-          label: 'English',
-          lang: 'en',
-        },
-      },
+      
       social: {
         github: 'https://github.com/withastro/starlight',
       },

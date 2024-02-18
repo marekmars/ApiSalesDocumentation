@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-has-toc data-has-sidebar data-theme="dark" class="astro-bguv2lll">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Sales | Docs</title>
+	<link rel="canonical" />
+	<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+	<meta name="generator" content="Astro v4.4.0" />
+	<meta name="generator" content="Starlight v0.18.1" />
+	<meta property="og:title" content="Sales" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" />
+	<meta property="og:locale" content="en" />
+	<meta property="og:description" content="All sales CRUD methods" />
+	<meta property="og:site_name" content="Docs with Tailwind" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Sales" />
+	<meta name="twitter:description" content="All sales CRUD methods" />
+	<meta name="description" content="All sales CRUD methods" />
+	<script>
+		window.StarlightThemeProvider = (() => {
+			const storedTheme =
+				typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+			const theme =
+				storedTheme ||
+				(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+			document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+			return {
+				updatePickers(theme = storedTheme || 'auto') {
+					document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+						const select = picker.querySelector('select');
+						if (select) select.value = theme;
+						/** @type {HTMLTemplateElement | null} */
+						const tmpl = document.querySelector(`#theme-icons`);
+						const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+						if (newIcon) {
+							const oldIcon = picker.querySelector('svg.label-icon');
+							if (oldIcon) {
+								oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+							}
+						}
+					});
+				},
+			};
+		})();
+	</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16"
+			viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;">
+			<path
+				d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z" />
+		</svg> <svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24"
+			fill="currentColor" style="--sl-icon-size: 1em;">
+			<path
+				d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z" />
+		</svg> <svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24"
+			fill="currentColor" style="--sl-icon-size: 1em;">
+			<path
+				d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z" />
+		</svg> </template>
+	<link rel="stylesheet" href="/_astro/index.TnBRVaEm.css" />
+	<style>
+		svg:where(.astro-c6vsoqas) {
+			color: var(--sl-icon-color);
+			font-size: var(--sl-icon-size, 1em);
+			width: 1em;
+			height: 1em
+		}
+	</style>
+	<script type="module" src="/_astro/hoisted.MZbyzFau.js"></script>
+	<script type="module" src="/_astro/page.CZ0TFQCk.js"></script>
+</head>
+
+<body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a>
+	<div class="page sl-flex astro-vrdttmbt">
+		<header class="header astro-vrdttmbt">
+			<div class="header sl-flex astro-kmkmnagf">
+				<div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/"
+						class="site-title sl-flex astro-m46x6ez3"> <img src="/_astro/logo-white.svg" alt=""
+							class="logo astro-m46x6ez3" width="32" height="32" /> </a> </div>
+				<div class="sl-flex astro-kmkmnagf"> <site-search
+						data-translations="{&#34;placeholder&#34;:&#34;Search&#34;}" class="astro-v37mnknz"> <button
+							data-open-modal disabled class="astro-v37mnknz"> <svg aria-label="Search"
+								class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24"
+								fill="currentColor" style="--sl-icon-size: 1em;">
+								<path
+									d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z" />
+							</svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span>
+							<svg aria-label="(Press / to Search)"
+								class="sl-hidden md:sl-block astro-v37mnknz astro-c6vsoqas" width="16" height="16"
+								viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;">
+								<path
+									d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Zm3 15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10Z" />
+								<path
+									d="M15.293 6.707a1 1 0 1 1 1.414 1.414l-8.485 8.486a1 1 0 0 1-1.414-1.415l8.485-8.485Z" />
+							</svg> </button>
+						<dialog style="padding:0" aria-label="Search" class="astro-v37mnknz">
+							<div class="dialog-frame sl-flex astro-v37mnknz"> <button data-close-modal
+									class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button>
+								<div class="search-container astro-v37mnknz">
+									<div id="starlight__search" class="astro-v37mnknz"></div>
+								</div>
+							</div>
+						</dialog>
+					</site-search> </div>
+				<div class="sl-hidden md:sl-flex right-group astro-kmkmnagf">
+					<div class="sl-flex social-icons astro-kmkmnagf"> <a href="https://github.com/withastro/starlight"
+							rel="me" class="sl-flex astro-wy4te6ga"><span
+								class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true"
+								class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24"
+								fill="currentColor" style="--sl-icon-size: 1em;">
+								<path
+									d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z" />
+							</svg> </a> </div> <starlight-theme-select> <label style="--sl-select-width: 6.25em"
+							class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg
+								aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16"
+								height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;">
+								<path
+									d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z" />
+							</svg> <select value="auto" class="astro-4yphtoen">
+								<option value="dark" class="astro-4yphtoen">Dark</option>
+								<option value="light" class="astro-4yphtoen">Light</option>
+								<option value="auto" selected="true" class="astro-4yphtoen">Auto</option>
+							</select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas"
+								width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+								style="--sl-icon-size: 1em;">
+								<path
+									d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z" />
+							</svg> </label> </starlight-theme-select>
+					<script>
+						StarlightThemeProvider.updatePickers();
+					</script>
+				</div>
+			</div>
+		</header>
+		<nav class="sidebar astro-vrdttmbt" aria-label="Main"> <starlight-menu-button class="astro-jif73yzw"> <button
+					aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar"
+					class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true"
+						class="astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24"
+						fill="currentColor" style="--sl-icon-size: 1em;">
+						<path
+							d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z" />
+					</svg> </button> </starlight-menu-button>
+			<div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt">
+				<div class="sidebar-content sl-flex astro-vrdttmbt">
+					<ul class="top-level astro-3ii7xxms">
+						<li class="astro-3ii7xxms">
+							<details open class="astro-3ii7xxms">
+								<summary class="astro-3ii7xxms">
+									<div class="group-label astro-3ii7xxms"> <span
+											class="large astro-3ii7xxms">Overview</span> </div> <svg aria-hidden="true"
+										class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16"
+										viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;">
+										<path
+											d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z" />
+									</svg>
+								</summary>
+								<ul class="astro-3ii7xxms">
+									<li class="astro-3ii7xxms"> <a href="/guides/overview/" class="astro-3ii7xxms">
+											<span class="astro-3ii7xxms">Api Overview</span> </a> </li>
+								</ul>
+							</details>
+						</li>
+						<li class="astro-3ii7xxms">
+							<details open class="astro-3ii7xxms">
+								<summary class="astro-3ii7xxms">
+									<div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">API REST
+											Documentation</span> </div> <svg aria-hidden="true"
+										class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16"
+										viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;">
+										<path
+											d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z" />
+									</svg>
+								</summary>
+								<ul class="astro-3ii7xxms">
+									<li class="astro-3ii7xxms"> <a href="/guides/clients/" class="astro-3ii7xxms"> <span
+												class="astro-3ii7xxms">Clients Endpoints</span> </a> </li>
+									<li class="astro-3ii7xxms"> <a href="/guides/products/" class="astro-3ii7xxms">
+											<span class="astro-3ii7xxms">Products Endpoints</span> </a> </li>
+									<li class="astro-3ii7xxms"> <a href="/guides/auth/" class="astro-3ii7xxms"> <span
+												class="astro-3ii7xxms">Authentication Endpoints</span> </a> </li>
+									<li class="astro-3ii7xxms"> <a href="/guides/users/" class="astro-3ii7xxms"> <span
+												class="astro-3ii7xxms">Users Endpoints</span> </a> </li>
+									<li class="astro-3ii7xxms"> <a href="/guides/roles/" class="astro-3ii7xxms"> <span
+												class="astro-3ii7xxms">Roles Endpoints</span> </a> </li>
+									<li class="astro-3ii7xxms"> <a href="/guides/sales/" aria-current="page"
+											class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Sales Endpoints</span>
+										</a> </li>
+								</ul>
+							</details>
+						</li>
+						<li class="astro-3ii7xxms">
+							<details open class="astro-3ii7xxms">
+								<summary class="astro-3ii7xxms">
+									<div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Errors
+											Handling</span> </div> <svg aria-hidden="true"
+										class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16"
+										viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;">
+										<path
+											d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z" />
+									</svg>
+								</summary>
+								<ul class="astro-3ii7xxms">
+									<li class="astro-3ii7xxms"> <a href="/guides/error-handling/"
+											class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Errors Handling</span>
+										</a> </li>
+								</ul>
+							</details>
+						</li>
+					</ul>
+					<div class="md:sl-hidden">
+						<div class="mobile-preferences sl-flex astro-wu23bvmt">
+							<div class="sl-flex social-icons astro-wu23bvmt"> <a href="https://github.com/marekmars"
+									rel="me" class="sl-flex astro-wy4te6ga"><span
+										class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true"
+										class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24"
+										fill="currentColor" style="--sl-icon-size: 1em;">
+										<path
+											d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z" />
+									</svg> </a> </div> <starlight-theme-select> <label style="--sl-select-width: 6.25em"
+									class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span>
+									<svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas"
+										width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+										style="--sl-icon-size: 1em;">
+										<path
+											d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z" />
+									</svg> <select value="auto" class="astro-4yphtoen">
+										<option value="dark" class="astro-4yphtoen">Dark</option>
+										<option value="light" class="astro-4yphtoen">Light</option>
+										<option value="auto" selected="true" class="astro-4yphtoen">Auto</option>
+									</select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas"
+										width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+										style="--sl-icon-size: 1em;">
+										<path
+											d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z" />
+									</svg> </label> </starlight-theme-select>
+							<script>
+								StarlightThemeProvider.updatePickers();
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="main-frame astro-vrdttmbt">
+			<div class="lg:sl-flex astro-67yu43on">
+				<aside class="right-sidebar-container astro-67yu43on">
+					<div class="right-sidebar astro-67yu43on">
+						<div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3"
+								class="astro-doynk5tl">
+								<nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl">
+									<details id="starlight__mobile-toc" class="astro-doynk5tl">
+										<summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl">
+											<div class="toggle sl-flex astro-doynk5tl">On this page<svg
+													aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas"
+													width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+													style="--sl-icon-size: 1rem;">
+													<path
+														d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z" />
+												</svg> </div><span class="display-current astro-doynk5tl"></span>
+										</summary>
+										<div class="dropdown astro-doynk5tl">
+											<ul class="isMobile astro-g2bywc46" style="--depth: 0;">
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top"
+														class="astro-g2bywc46" style="--depth: 0;"> <span
+															class="astro-g2bywc46" style="--depth: 0;">Overview</span>
+													</a> </li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#1-get-sales"
+														class="astro-g2bywc46" style="--depth: 0;"> <span
+															class="astro-g2bywc46" style="--depth: 0;">1. Get
+															Sales</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#request" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Request</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#response" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Response</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a
+														href="#2-get-sale-by-id" class="astro-g2bywc46"
+														style="--depth: 0;"> <span class="astro-g2bywc46"
+															style="--depth: 0;">2. Get Sale by ID</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#request-1" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Request</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#response-1" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Response</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#3-add-sale"
+														class="astro-g2bywc46" style="--depth: 0;"> <span
+															class="astro-g2bywc46" style="--depth: 0;">3. Add
+															Sale</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#request-2" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Request</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#example" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Example</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#response-2" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Response</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#5-update-sale"
+														class="astro-g2bywc46" style="--depth: 0;"> <span
+															class="astro-g2bywc46" style="--depth: 0;">5. Update
+															Sale</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#request-3" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Request</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#example-1" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Example</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#response-3" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Response</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a
+														href="#6-delete-sale-logic" class="astro-g2bywc46"
+														style="--depth: 0;"> <span class="astro-g2bywc46"
+															style="--depth: 0;">6. Delete Sale (Logic)</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#request-4" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Request</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#example-2" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Example</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#response-4" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Response</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a
+														href="#7-full-delete-sale" class="astro-g2bywc46"
+														style="--depth: 0;"> <span class="astro-g2bywc46"
+															style="--depth: 0;">7. Full Delete Sale</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#request-5" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Request</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#example-3" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Example</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#response-5" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Response</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a
+														href="#pagination-and-filtering-in-get-sales"
+														class="astro-g2bywc46" style="--depth: 0;"> <span
+															class="astro-g2bywc46" style="--depth: 0;">Pagination and
+															Filtering in Get Sales</span> </a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#pagination" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Pagination</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#filtering" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Filtering</span> </a> </li>
+													</ul>
+												</li>
+												<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#data-model"
+														class="astro-g2bywc46" style="--depth: 0;"> <span
+															class="astro-g2bywc46" style="--depth: 0;">Data Model</span>
+													</a>
+													<ul class="isMobile astro-g2bywc46" style="--depth: 1;">
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#sale"
+																class="astro-g2bywc46" style="--depth: 1;"> <span
+																	class="astro-g2bywc46"
+																	style="--depth: 1;">Sale</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#concept" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Concept</span> </a> </li>
+														<li class="astro-g2bywc46" style="--depth: 1;"> <a
+																href="#validations" class="astro-g2bywc46"
+																style="--depth: 1;"> <span class="astro-g2bywc46"
+																	style="--depth: 1;">Validations</span> </a> </li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+									</details>
+								</nav>
+							</mobile-starlight-toc></div>
+						<div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn">
+							<div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3">
+									<nav aria-labelledby="starlight__on-this-page">
+										<h2 id="starlight__on-this-page">On this page</h2>
+										<ul class="astro-g2bywc46" style="--depth: 0;">
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top"
+													class="astro-g2bywc46" style="--depth: 0;"> <span
+														class="astro-g2bywc46" style="--depth: 0;">Overview</span> </a>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#1-get-sales"
+													class="astro-g2bywc46" style="--depth: 0;"> <span
+														class="astro-g2bywc46" style="--depth: 0;">1. Get Sales</span>
+												</a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#request"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Request</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#response"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Response</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#2-get-sale-by-id"
+													class="astro-g2bywc46" style="--depth: 0;"> <span
+														class="astro-g2bywc46" style="--depth: 0;">2. Get Sale by
+														ID</span> </a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#request-1"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Request</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#response-1" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Response</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#3-add-sale"
+													class="astro-g2bywc46" style="--depth: 0;"> <span
+														class="astro-g2bywc46" style="--depth: 0;">3. Add Sale</span>
+												</a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#request-2"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Request</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#example"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Example</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#response-2" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Response</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#5-update-sale"
+													class="astro-g2bywc46" style="--depth: 0;"> <span
+														class="astro-g2bywc46" style="--depth: 0;">5. Update Sale</span>
+												</a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#request-3"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Request</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#example-1"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Example</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#response-3" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Response</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a
+													href="#6-delete-sale-logic" class="astro-g2bywc46"
+													style="--depth: 0;"> <span class="astro-g2bywc46"
+														style="--depth: 0;">6. Delete Sale (Logic)</span> </a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#request-4"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Request</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#example-2"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Example</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#response-4" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Response</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a
+													href="#7-full-delete-sale" class="astro-g2bywc46"
+													style="--depth: 0;"> <span class="astro-g2bywc46"
+														style="--depth: 0;">7. Full Delete Sale</span> </a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#request-5"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Request</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#example-3"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Example</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#response-5" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Response</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a
+													href="#pagination-and-filtering-in-get-sales" class="astro-g2bywc46"
+													style="--depth: 0;"> <span class="astro-g2bywc46"
+														style="--depth: 0;">Pagination and Filtering in Get Sales</span>
+												</a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#pagination" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Pagination</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#filtering"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Filtering</span> </a> </li>
+												</ul>
+											</li>
+											<li class="astro-g2bywc46" style="--depth: 0;"> <a href="#data-model"
+													class="astro-g2bywc46" style="--depth: 0;"> <span
+														class="astro-g2bywc46" style="--depth: 0;">Data Model</span>
+												</a>
+												<ul class="astro-g2bywc46" style="--depth: 1;">
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#sale"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46" style="--depth: 1;">Sale</span>
+														</a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a href="#concept"
+															class="astro-g2bywc46" style="--depth: 1;"> <span
+																class="astro-g2bywc46"
+																style="--depth: 1;">Concept</span> </a> </li>
+													<li class="astro-g2bywc46" style="--depth: 1;"> <a
+															href="#validations" class="astro-g2bywc46"
+															style="--depth: 1;"> <span class="astro-g2bywc46"
+																style="--depth: 1;">Validations</span> </a> </li>
+												</ul>
+											</li>
+										</ul>
+									</nav>
+								</starlight-toc></div>
+						</div>
+					</div>
+				</aside>
+				<div class="main-pane astro-67yu43on">
+					<main data-pagefind-body lang="en" dir="ltr" class="astro-bguv2lll">
+						<div class="content-panel astro-7nkwcw3z">
+							<div class="sl-container astro-7nkwcw3z">
+								<h1 id="_top" class="astro-j6tvhyss">Sales</h1>
+							</div>
+						</div>
+						<div class="content-panel astro-7nkwcw3z">
+							<div class="sl-container astro-7nkwcw3z">
+								<div class="sl-markdown-content">
+									<h2 id="1-get-sales">1. Get Sales</h2>
+									<h3 id="request">Request</h3>
+									<ul>
+										<li><strong>Method:</strong> <code dir="auto">GET</code></li>
+										<li><strong>Endpoint:</strong> <code dir="auto">/api/sales</code></li>
+										<li><strong>Parameters:</strong>
+											<ul>
+												<li><code dir="auto">filter</code> (optional): Filter sales by client
+													name, last name, or DNI.</li>
+												<li><code dir="auto">skip</code> (optional): Number of records to skip.
+												</li>
+												<li><code dir="auto">limit</code> (optional): Maximum number of records
+													to retrieve.</li>
+												<li><code dir="auto">orderBy</code> (optional): Property by which to
+													order the results (e.g., “date”, “total”).</li>
+												<li><code dir="auto">desc</code> (optional): Set to true for descending
+													order, false or omit for ascending order.</li>
+											</ul>
+										</li>
+									</ul>
+									<p><strong>Example</strong></p>
+									<div class="expressive-code">
+										<link rel="stylesheet" href="/_astro/ec.usa2f.css">
+										<script type="module" src="/_astro/ec.sgewm.js"></script>
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53"> GET /api/sales?filter=Juan&#x26;skip=0&#x26;limit=10&#x26;orderBy=date&#x26;desc=true</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code=" GET /api/sales?filter=Juan&#x26;skip=0&#x26;limit=10&#x26;orderBy=date&#x26;desc=true">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h3 id="response">Response</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#7FDBCA;--1:#097174">"success"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#7FDBCA;--1:#097174">"message"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Ventas obtenidas correctamente</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#7FDBCA;--1:#097174">"data"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"idClient"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">39</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"client"</span><span style="--0:#D6DEEB;--1:#403F53">: {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">39</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"name"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Juan</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"lastname"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">González</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"idcard"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">12345678A</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"mail"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">juan.gonzalez@example.com</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#FF5874;--1:#A54A4A">true</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        },</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"date"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">2024-01-18T11:17:58</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"total"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">840.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#FF5874;--1:#A54A4A">true</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#7FDBCA;--1:#097174">"concepts"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#809191;--1:#5E6578">// Concept objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        ]</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      },</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#809191;--1:#5E6578">// Additional sale objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    ],</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#7FDBCA;--1:#097174">"totalCount"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">100</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  }</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="  {    &#x22;success&#x22;: 1,    &#x22;message&#x22;: &#x22;Ventas obtenidas correctamente&#x22;,    &#x22;data&#x22;: [      {        &#x22;id&#x22;: 1,        &#x22;idClient&#x22;: 39,        &#x22;client&#x22;: {          &#x22;id&#x22;: 39,          &#x22;name&#x22;: &#x22;Juan&#x22;,          &#x22;lastname&#x22;: &#x22;González&#x22;,          &#x22;idcard&#x22;: &#x22;12345678A&#x22;,          &#x22;mail&#x22;: &#x22;juan.gonzalez@example.com&#x22;,          &#x22;state&#x22;: true        },        &#x22;date&#x22;: &#x22;2024-01-18T11:17:58&#x22;,        &#x22;total&#x22;: 840.00,        &#x22;state&#x22;: true,        &#x22;concepts&#x22;: [          // Concept objects...        ]      },      // Additional sale objects...    ],    &#x22;totalCount&#x22;: 100  }">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h2 id="2-get-sale-by-id">2. Get Sale by ID</h2>
+									<h3 id="request-1">Request</h3>
+									<ul>
+										<li><strong>Method:</strong> <code dir="auto">GET</code></li>
+										<li><strong>Endpoint:</strong> <code dir="auto">/api/sales/{Id}</code></li>
+									</ul>
+									<p><strong>Example</strong></p>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8D46B4">GET</span><span style="--0:#D6DEEB;--1:#403F53"> /api/sales/1</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="GET /api/sales/1">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h3 id="response-1">Response</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"success"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"message"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Venta obtenida correctamente</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"data"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"idClient"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">101</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"date"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">2024-02-15T10:30:00</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"total"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">150.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"concepts"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"quantity"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"unitaryPrice"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">75.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"import"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">150.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"idProduct"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">201</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#809191;--1:#5E6578">// Additional concept objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      ]</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  ],</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"totalCount"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="{  &#x22;success&#x22;: 1,  &#x22;message&#x22;: &#x22;Venta obtenida correctamente&#x22;,  &#x22;data&#x22;: [    {      &#x22;id&#x22;: 1,      &#x22;idClient&#x22;: 101,      &#x22;date&#x22;: &#x22;2024-02-15T10:30:00&#x22;,      &#x22;total&#x22;: 150.00,      &#x22;state&#x22;: 1,      &#x22;concepts&#x22;: [        {          &#x22;id&#x22;: 1,          &#x22;quantity&#x22;: 2,          &#x22;unitaryPrice&#x22;: 75.00,          &#x22;import&#x22;: 150.00,          &#x22;idProduct&#x22;: 201,          &#x22;state&#x22;: 1        }        // Additional concept objects...      ]    }  ],  &#x22;totalCount&#x22;: 1}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h2 id="3-add-sale">3. Add Sale</h2>
+									<h3 id="request-2">Request</h3>
+									<ul>
+										<li><strong>Method:</strong> <code dir="auto">POST</code></li>
+										<li><strong>Endpoint:</strong> <code dir="auto">/api/sales</code></li>
+										<li><strong>Body:</strong>
+											<ul>
+												<li><code dir="auto">idClient</code> (required): ID of the client for
+													the sale.</li>
+												<li><code dir="auto">concepts</code> (required): List of concepts for
+													the sale, including <code dir="auto">quantity</code>, <code
+														dir="auto">unitaryPrice</code>, <code dir="auto">import</code>,
+													<code dir="auto">idProduct</code>.</li>
+											</ul>
+										</li>
+									</ul>
+									<h3 id="example">Example</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8D46B4">POST</span><span style="--0:#D6DEEB;--1:#403F53"> /api/sales</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"idClient"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">101</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"concepts"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"quantity"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"unitaryPrice"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">75.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"import"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">150.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"idProduct"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">201</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#809191;--1:#5E6578">// Additional concept objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  ]</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="POST /api/sales{  &#x22;idClient&#x22;: 101,  &#x22;concepts&#x22;: [    {      &#x22;quantity&#x22;: 2,      &#x22;unitaryPrice&#x22;: 75.00,      &#x22;import&#x22;: 150.00,      &#x22;idProduct&#x22;: 201    }    // Additional concept objects...  ]}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h3 id="response-2">Response</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"success"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"message"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Venta creada correctamente</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"data"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">102</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"idClient"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">101</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"date"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">2024-02-15T12:45:00</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"total"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">300.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"concepts"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">201</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"quantity"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"unitaryPrice"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">150.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"import"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">300.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"idProduct"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">301</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#809191;--1:#5E6578">// Additional concept objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      ]</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  ],</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"totalCount"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="{  &#x22;success&#x22;: 1,  &#x22;message&#x22;: &#x22;Venta creada correctamente&#x22;,  &#x22;data&#x22;: [    {      &#x22;id&#x22;: 102,      &#x22;idClient&#x22;: 101,      &#x22;date&#x22;: &#x22;2024-02-15T12:45:00&#x22;,      &#x22;total&#x22;: 300.00,      &#x22;state&#x22;: 1,      &#x22;concepts&#x22;: [        {          &#x22;id&#x22;: 201,          &#x22;quantity&#x22;: 2,          &#x22;unitaryPrice&#x22;: 150.00,          &#x22;import&#x22;: 300.00,          &#x22;idProduct&#x22;: 301,          &#x22;state&#x22;: 1        }        // Additional concept objects...      ]    }  ],  &#x22;totalCount&#x22;: 1}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h2 id="5-update-sale">5. Update Sale</h2>
+									<h3 id="request-3">Request</h3>
+									<ul>
+										<li><strong>Method:</strong> <code dir="auto">PATCH</code></li>
+										<li><strong>Endpoint:</strong> <code dir="auto">/api/sales</code></li>
+										<li><strong>Body:</strong>
+											<ul>
+												<li><code dir="auto">id</code> (required): ID of the sale to update.
+												</li>
+												<li>Additional fields (optional): Updated values for <code
+														dir="auto">idClient</code>, <code dir="auto">concepts</code>.
+												</li>
+											</ul>
+										</li>
+									</ul>
+									<h3 id="example-1">Example</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8D46B4">PATCH</span><span style="--0:#D6DEEB;--1:#403F53"> /api/sales</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">102</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"concepts"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"quantity"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"unitaryPrice"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">100.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"import"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">300.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"idProduct"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">201</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#809191;--1:#5E6578">// Additional updated concept objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  ]</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="PATCH /api/sales{  &#x22;id&#x22;: 102,  &#x22;concepts&#x22;: [    {      &#x22;quantity&#x22;: 3,      &#x22;unitaryPrice&#x22;: 100.00,      &#x22;import&#x22;: 300.00,      &#x22;idProduct&#x22;: 201    }    // Additional updated concept objects...  ]}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h3 id="response-3">Response</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"success"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"message"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Venta actualizada correctamente</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"data"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">102</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"idClient"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">101</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"date"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">2024-02-15T12:45:00</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"total"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">300.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      </span><span style="--0:#7FDBCA;--1:#097174">"concepts"</span><span style="--0:#D6DEEB;--1:#403F53">: [</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        {</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"id"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">201</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"quantity"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"unitaryPrice"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">100.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"import"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">300.00</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"idProduct"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">301</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">          </span><span style="--0:#7FDBCA;--1:#097174">"state"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#809191;--1:#5E6578">// Additional updated concept objects...</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">      ]</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    }</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  ],</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"totalCount"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="{  &#x22;success&#x22;: 1,  &#x22;message&#x22;: &#x22;Venta actualizada correctamente&#x22;,  &#x22;data&#x22;: [    {      &#x22;id&#x22;: 102,      &#x22;idClient&#x22;: 101,      &#x22;date&#x22;: &#x22;2024-02-15T12:45:00&#x22;,      &#x22;total&#x22;: 300.00,      &#x22;state&#x22;: 1,      &#x22;concepts&#x22;: [        {          &#x22;id&#x22;: 201,          &#x22;quantity&#x22;: 3,          &#x22;unitaryPrice&#x22;: 100.00,          &#x22;import&#x22;: 300.00,          &#x22;idProduct&#x22;: 301,          &#x22;state&#x22;: 1        }        // Additional updated concept objects...      ]    }  ],  &#x22;totalCount&#x22;: 1}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h2 id="6-delete-sale-logic">6. Delete Sale (Logic)</h2>
+									<h3 id="request-4">Request</h3>
+									<ul>
+										<li><strong>Method:</strong> <code dir="auto">DELETE</code></li>
+										<li><strong>Endpoint:</strong> <code dir="auto">/api/sales/{Id}</code></li>
+										<li><strong>Parameters:</strong>
+											<ul>
+												<li><code dir="auto">Id</code> (required): ID of the sale to delete.
+												</li>
+											</ul>
+										</li>
+									</ul>
+									<h3 id="example-2">Example</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8D46B4">DELETE</span><span style="--0:#D6DEEB;--1:#403F53"> /api/sales/102</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="DELETE /api/sales/102">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h3 id="response-4">Response</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"success"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"message"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Venta eliminada correctamente</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"data"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#FF5874;--1:#A54A4A">null</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"totalCount"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="{  &#x22;success&#x22;: 1,  &#x22;message&#x22;: &#x22;Venta eliminada correctamente&#x22;,  &#x22;data&#x22;: null,  &#x22;totalCount&#x22;: 1}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h2 id="7-full-delete-sale">7. Full Delete Sale</h2>
+									<h3 id="request-5">Request</h3>
+									<ul>
+										<li><strong>Method:</strong> <code dir="auto">DELETE</code></li>
+										<li><strong>Endpoint:</strong> <code
+												dir="auto">/api/sales/fulldelete/{Id}</code></li>
+										<li><strong>Parameters:</strong>
+											<ul>
+												<li><code dir="auto">Id</code> (required): ID of the sale to fully
+													delete.</li>
+											</ul>
+										</li>
+									</ul>
+									<h3 id="example-3">Example</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8D46B4">DELETE</span><span style="--0:#D6DEEB;--1:#403F53"> /api/sales/fulldelete/102</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="DELETE /api/sales/fulldelete/102">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h3 id="response-5">Response</h3>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"success"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"message"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#C789D6;--1:#7F5889">Venta eliminada permanentemente correctamente</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"data"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#FF5874;--1:#A54A4A">null</span><span style="--0:#D6DEEB;--1:#403F53">,</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">  </span><span style="--0:#7FDBCA;--1:#097174">"totalCount"</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">1</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="{  &#x22;success&#x22;: 1,  &#x22;message&#x22;: &#x22;Venta eliminada permanentemente correctamente&#x22;,  &#x22;data&#x22;: null,  &#x22;totalCount&#x22;: 1}">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<h2 id="pagination-and-filtering-in-get-sales">Pagination and Filtering in Get Sales
+									</h2>
+									<p>When using the <code dir="auto">Get Sales</code> endpoint, you can apply
+										pagination and filtering to retrieve specific sets of data.</p>
+									<h3 id="pagination">Pagination</h3>
+									<ul>
+										<li>Use the <code dir="auto">skip</code> parameter to skip a certain number of
+											records.</li>
+										<li>Use the <code dir="auto">limit</code> parameter to set the maximum number of
+											records to retrieve.</li>
+									</ul>
+									<p><strong>Example:</strong></p>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">GET /api/sales?skip=10&#x26;limit=5</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="GET /api/sales?skip=10&#x26;limit=5">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<p>This will skip the first 10 records and retrieve the next 5 records.</p>
+									<h3 id="filtering">Filtering</h3>
+									<ul>
+										<li>Use the <code dir="auto">filter</code> parameter to filter users by client
+											name, client last name, date, or product name.</li>
+										<li>Use the <code dir="auto">orderBy</code> parameter to specify the property by
+											which to order the results (date, client name or last name and total price).
+										</li>
+										<li>Use the <code dir="auto">desc</code> parameter to set the order as
+											descending (1) for descending order.</li>
+									</ul>
+									<p><strong>Example:</strong></p>
+									<div class="expressive-code">
+										<figure class="frame not-content">
+											<figcaption class="header"></figcaption>
+											<pre
+												tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">GET /api/sales?filter=Doe&#x26;orderBy=date&#x26;desc=1</span></div></code></pre>
+											<div class="copy"><button title="Copy to clipboard" data-copied="Copied!"
+													data-code="GET /api/sales?filter=Doe&#x26;orderBy=date&#x26;desc=1">
+													<div></div>
+												</button></div>
+										</figure>
+									</div>
+									<p>This will filter sales with the client last name “Doe” and order the results by
+										the date in descending order.</p>
+									<h2 id="data-model">Data Model</h2>
+									<h3 id="sale">Sale</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									<table>
+										<thead>
+											<tr>
+												<th>Attribute</th>
+												<th>Type</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>id</td>
+												<td>Long</td>
+												<td>ID of the sale</td>
+											</tr>
+											<tr>
+												<td>idClient</td>
+												<td>Long</td>
+												<td>ID of the client for the sale.</td>
+											</tr>
+											<tr>
+												<td>concepts</td>
+												<td>List</td>
+												<td>List of concepts for the sale.</td>
+											</tr>
+											<tr>
+												<td>date</td>
+												<td>DateTime</td>
+												<td>Date of the sale.</td>
+											</tr>
+											<tr>
+												<td>total</td>
+												<td>Decimal</td>
+												<td>Total amount of the sale.</td>
+											</tr>
+											<tr>
+												<td>state</td>
+												<td>Byte</td>
+												<td>State of the sale.</td>
+											</tr>
+										</tbody>
+									</table>
+									<h3 id="concept">Concept</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									<table>
+										<thead>
+											<tr>
+												<th>Attribute</th>
+												<th>Type</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>id</td>
+												<td>Long</td>
+												<td>ID</td>
+											</tr>
+											<tr>
+												<td>quantity</td>
+												<td>Int</td>
+												<td>Quantity of the product in the concept.</td>
+											</tr>
+											<tr>
+												<td>unitaryPrice</td>
+												<td>Decimal</td>
+												<td>Unitary price of the product in the concept.</td>
+											</tr>
+											<tr>
+												<td>import</td>
+												<td>Decimal</td>
+												<td>Total import of the concept.</td>
+											</tr>
+											<tr>
+												<td>idProduct</td>
+												<td>Long</td>
+												<td>ID of the product in the concept.</td>
+											</tr>
+											<tr>
+												<td>state</td>
+												<td>Byte</td>
+												<td>State of the concept.</td>
+											</tr>
+										</tbody>
+									</table>
+									<h3 id="validations">Validations</h3>
+									<ul>
+										<li><strong>idClient:</strong> Must be a positive integer and exist in the
+											database.</li>
+										<li><strong>concepts:</strong> Must have at least one concept with valid data.
+										</li>
+										<li><strong>quantity:</strong> Must be a positive integer.</li>
+										<li><strong>unitaryPrice:</strong> Must be a positive decimal.</li>
+										<li><strong>import:</strong> Must be a positive decimal.</li>
+										<li><strong>idProduct:</strong> Must be a positive integer, exist in the
+											database and have the requested stock.</li>
+										<li><strong>state:</strong> Must be a byte value.</li>
+									</ul>
+								</div>
+								<footer class="astro-3yyafb3n">
+									<div class="meta sl-flex astro-3yyafb3n"> </div>
+									<div class="pagination-links astro-u2l5gyhi" dir="ltr"> <a href="/guides/roles/"
+											rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true"
+												class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16"
+												viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;">
+												<path
+													d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z" />
+											</svg> <span class="astro-u2l5gyhi"> Previous <br class="astro-u2l5gyhi">
+												<span class="link-title astro-u2l5gyhi">Roles Endpoints</span> </span>
+										</a> <a href="/guides/error-handling/" rel="next" class="astro-u2l5gyhi"> <svg
+												aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16"
+												height="16" viewBox="0 0 24 24" fill="currentColor"
+												style="--sl-icon-size: 1.5rem;">
+												<path
+													d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z" />
+											</svg> <span class="astro-u2l5gyhi"> Next <br class="astro-u2l5gyhi"> <span
+													class="link-title astro-u2l5gyhi">Errors Handling</span> </span>
+										</a> </div>
+								</footer>
+							</div>
+						</div>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

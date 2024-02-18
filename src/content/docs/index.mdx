@@ -1,48 +1,48 @@
 ---
-title: Welcome to Sales API Documentation
+title: Welcome to my Sales API Documentation
 description: Explore the Sales API and its capabilities.
 template: splash
 hero:
   title: |
-    Welcome to Sales API with
-    <span
-      class="font-black text-transparent
-        bg-clip-text bg-gradient-to-b
-        from-accent-700 to-accent-400
-        dark:from-accent-500 dark:to-accent-200"
-    >
-      Tailwind
-    </span>
+    Welcome to my Sales API 
   tagline: Explore the features of the Sales API for efficient management.
   image:
     file: ../../assets/logoApi.webp
   actions:
     - text: API Documentation
-      link: /api-docs/
+      link: /guides/overview/
       icon: right-arrow
       variant: primary
-    - text: Visit the Starlight Docs
-      link: https://starlight.astro.build
-      icon: external
+
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import {Footer} from '../../components/Footer.astro';
 
 ## Next steps for Sales API Integration
 
 <CardGrid stagger>
-	<Card title="Manage Users" icon="">
-  
-		Handle user-related operations using the CRUD API for users.
+	<Card title="Manage Users" icon="users">
+   Handle user-related operations using the CRUD API for users.
 	</Card>
-	<Card title="Handle Clients" icon="user-circle">
+	<Card title="Handle Clients" icon="clients">
 		Perform CRUD operations for clients to manage client information.
 	</Card>
-	<Card title="Process Sales" icon="cash-register">
+	<Card title="Process Sales" icon="sales">
 		Utilize the API for CRUD operations on sales transactions.
 	</Card>
-	<Card title="Manage Products" icon="box">
+	<Card title="Manage Products" icon="products">
 		Handle products efficiently through CRUD operations using the API.
 	</Card>
 </CardGrid>
+<footer class="text-gray-600 body-font">
+  <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+    <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+    href="https://astro.build/themes/details/starlight/">
+     
+      <span class="ml-3 text-xl">Made with Starligth Astro</span>
+    </a>
+   
+  </div>
+</footer>
 
